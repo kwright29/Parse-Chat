@@ -21,6 +21,7 @@
 		EED41B18286A153E00BB2BED /* Parse_ChatUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EED41B17286A153E00BB2BED /* Parse_ChatUITestsLaunchTests.m */; };
 		EED41B26286A175B00BB2BED /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED41B25286A175B00BB2BED /* LoginViewController.m */; };
 		EED41B29286A1DB100BB2BED /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED41B28286A1DB100BB2BED /* ChatViewController.m */; };
+		EED41B2C286A32A600BB2BED /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EED41B2B286A32A600BB2BED /* ChatCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,8 @@
 		EED41B25286A175B00BB2BED /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		EED41B27286A1DB100BB2BED /* ChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		EED41B28286A1DB100BB2BED /* ChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		EED41B2A286A32A600BB2BED /* ChatCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
+		EED41B2B286A32A600BB2BED /* ChatCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
 		FFF28B4413E910CDE57E5436 /* Pods-Parse ChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parse ChatTests.debug.xcconfig"; path = "Target Support Files/Pods-Parse ChatTests/Pods-Parse ChatTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +163,8 @@
 				EED41B01286A153E00BB2BED /* main.m */,
 				EED41B27286A1DB100BB2BED /* ChatViewController.h */,
 				EED41B28286A1DB100BB2BED /* ChatViewController.m */,
+				EED41B2A286A32A600BB2BED /* ChatCell.h */,
+				EED41B2B286A32A600BB2BED /* ChatCell.m */,
 			);
 			path = "Parse Chat";
 			sourceTree = "<group>";
@@ -422,6 +427,7 @@
 				EED41B26286A175B00BB2BED /* LoginViewController.m in Sources */,
 				EED41AF1286A153D00BB2BED /* AppDelegate.m in Sources */,
 				EED41B29286A1DB100BB2BED /* ChatViewController.m in Sources */,
+				EED41B2C286A32A600BB2BED /* ChatCell.m in Sources */,
 				EED41B02286A153E00BB2BED /* main.m in Sources */,
 				EED41AF4286A153D00BB2BED /* SceneDelegate.m in Sources */,
 			);

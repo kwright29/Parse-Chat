@@ -6,8 +6,13 @@
 //
 
 #import "ChatViewController.h"
+#import <Parse/Parse.h>
+#import "ChatCell.h"
 
-@interface ChatViewController ()
+@interface ChatViewController () <UITableViewDataSource>
+@property (strong, nonatomic) IBOutlet UITextField *chatMessageField;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *messages;
 
 @end
 
@@ -16,6 +21,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UIRefreshControl *refreshControl =[[UIRefreshControl alloc]init];
+//    [refreshControl addTarget:self action:@selector(onTimerRefresh:) forControlEvents:UIControlEventValueChanged];
+    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(onTimerRefresh) userInfo:nil repeats:true];
+    [self.tableView insertSubview:refreshControl atIndex:0];
+}
+
+- (void)onTimerRefresh:(UIRefreshControl *)refreshControl {
+    
+    // Create NSURL and NSURLRequest
+
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
+                                                          delegate:nil
+                                                     delegateQueue:[NSOperationQueue mainQueue]];
+    session.configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+
+       // ... Use the new data to update the data source ...
+        
+       // Reload the tableView now that there is new data
+        [self.tableView reloadData];
+
+       // Tell the refreshControl to stop spinning
+        [refreshControl endRefreshing];
+
+    }];
+
+    [task resume];
 }
 
 /*
@@ -27,5 +61,34 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (IBAction)didTapSend:(id)sender {
+    //createing new message and saving it to Parse
+    PFObject *chatMessage = [PFObject objectWithClassName:@"Message_FBU2021"];
+    //storing text of text field in key called "text"
+    chatMessage[@"text"] = self.chatMessageField.text;
+    // call saveInBackground and print when the message successfully saves or any errors
+    [chatMessage saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+        if (succeeded) {
+            NSLog(@"The message was saved!");
+            self.chatMessageField.text = nil;
+            [self.messages addObject:chatMessage[@"text"]];
+        } else {
+            NSLog(@"Problem saving message: %@", error.localizedDescription);
+        }
+    }];
+}
+
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    ChatCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ChatCell"forIndexPath:indexPath];
+    cell.chatMessage.text = self.messages[indexPath.row];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.messages.count;
+}
+
+
 
 @end
